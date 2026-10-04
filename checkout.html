@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ===== SEO (static) — update here if company name changes ===== -->
+<title>Checkout | Noolthuli Cotton Sarees</title>
+<meta name="description" content="Complete your Noolthuli saree order. Free shipping, PDF receipt and WhatsApp confirmation.">
+<link rel="canonical" href="https://noolthuli.com/checkout.html">
+<meta name="theme-color" content="#fbf5e9">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Noolthuli">
+<meta property="og:title" content="Checkout | Noolthuli Cotton Sarees">
+<meta property="og:description" content="Complete your Noolthuli saree order. Free shipping, PDF receipt and WhatsApp confirmation.">
+<meta property="og:url" content="https://noolthuli.com/checkout.html">
+<meta property="og:image" content="https://noolthuli.com/images/og-image.jpg">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Checkout | Noolthuli Cotton Sarees">
+<meta name="twitter:description" content="Complete your Noolthuli saree order. Free shipping, PDF receipt and WhatsApp confirmation.">
+<meta name="twitter:image" content="https://noolthuli.com/images/og-image.jpg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preload" as="image" href="images/logo-mark.webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;family=Poppins:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Opening animation: saree curtains (inline so it shows instantly) */
+#intro{position:fixed;inset:0;z-index:999;display:grid;place-items:center;pointer-events:none}
+#intro .il,#intro .ir{position:absolute;top:0;bottom:0;width:50.5%;transition:transform 1.15s cubic-bezier(.75,0,.2,1)}
+#intro .il{left:0;background:linear-gradient(90deg,transparent calc(100% - 46px),#7a1530 calc(100% - 46px) calc(100% - 44px),#c99a3c calc(100% - 44px) calc(100% - 30px),transparent calc(100% - 30px) calc(100% - 27px),#b8892f calc(100% - 27px) calc(100% - 24px),transparent 0),repeating-linear-gradient(0deg,rgba(184,137,47,.07) 0 2px,transparent 2px 6px),linear-gradient(90deg,#f3e3c3,#fffdf8 75%)}
+#intro .ir{right:0;background:linear-gradient(270deg,transparent calc(100% - 46px),#7a1530 calc(100% - 46px) calc(100% - 44px),#c99a3c calc(100% - 44px) calc(100% - 30px),transparent calc(100% - 30px) calc(100% - 27px),#b8892f calc(100% - 27px) calc(100% - 24px),transparent 0),repeating-linear-gradient(0deg,rgba(184,137,47,.07) 0 2px,transparent 2px 6px),linear-gradient(270deg,#f3e3c3,#fffdf8 75%)}
+#intro .ic{position:relative;text-align:center;transition:opacity .45s,transform .6s;padding:0 16px}
+#intro .im{width:130px;height:112px;margin:0 auto;animation:inM 1.1s cubic-bezier(.2,.8,.2,1) both}
+#intro .it{width:190px;height:44px;margin:12px auto 0;animation:inT .9s .35s both}
+#intro svg{display:block;width:230px;height:22px;margin:8px auto 4px}
+#intro path{stroke-dasharray:320;stroke-dashoffset:320;animation:inD 1.1s .45s ease forwards}
+#intro p{margin:0;font:italic 500 15px/1.4 "Playfair Display",Georgia,serif;color:#85600f;letter-spacing:.04em;animation:inT .9s .7s both}
+.intro-done #intro .il{transform:translateX(-101%)}.intro-done #intro .ir{transform:translateX(101%)}
+.intro-done #intro .ic{opacity:0;transform:scale(1.08)}
+.intro-gone #intro{display:none}
+.intro-quick #intro .ic{display:none}.intro-quick #intro .il,.intro-quick #intro .ir{transition-duration:.75s}
+@keyframes inM{from{opacity:0;transform:translateY(14px) scale(.8) rotate(-6deg)}}
+@keyframes inT{from{opacity:0;transform:translateY(10px)}}
+@keyframes inD{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){#intro{display:none}}
+</style>
+<script>
+/* Intro: full animation on first visit, quick curtain on later pages. Never blocks more than 2 s. */
+(function(h){h.classList.add("js");var q;try{q=sessionStorage.getItem("ntIntro");sessionStorage.setItem("ntIntro","1")}catch(e){}
+if(q)h.classList.add("intro-quick");var t0=Date.now(),min=q?120:1500,f=0;
+function done(){if(f)return;f=1;h.classList.add("intro-done");setTimeout(function(){h.classList.add("intro-gone")},1250)}
+addEventListener("load",function(){setTimeout(done,Math.max(0,min-(Date.now()-t0)))});setTimeout(done,2000)})(document.documentElement);
+</script>
+<meta name="robots" content="noindex">
+<!-- Business details first, then products, then the rest -->
+<script defer src="js/config.js"></script>
+<script defer src="js/data.js"></script>
+<script defer src="js/layout.js"></script>
+<script defer src="js/cart.js"></script>
+<script defer src="js/app.js"></script>
+<script defer src="js/checkout.js"></script>
+</head>
+<body data-page="checkout">
+<div id="intro" aria-hidden="true"><div class="il"></div><div class="ir"></div>
+  <div class="ic"><img class="im" src="images/logo-mark.webp" width="130" height="112" alt="">
+  <img class="it" src="images/logo-tamil.webp" width="190" height="44" alt="">
+  <svg viewBox="0 0 230 22" fill="none"><path d="M2 11c30-14 50 14 80 0s50-14 66 0 50 14 80 0" stroke="#b8892f" stroke-width="1.6" stroke-linecap="round"/></svg>
+  <p>Tradition Woven with Elegance</p></div></div>
+<a class="skip" href="#main">Skip to content</a>
+<div id="site-header"></div>
+<main id="main">
+<section class="phead"><div class="wrap">
+  <div class="crumbs"><a href="index.html">Home</a> / Checkout</div>
+  <h1>Checkout</h1><p>Enter your details and confirm your order on WhatsApp. Shipping is free.</p>
+</div></section>
+<div class="kasavu"></div>
+<div class="wrap">
+  <div id="coEmpty" class="empty" hidden style="padding:60px 16px"><h2>Your bag is empty</h2><p>Add a saree to your bag to place an order.</p><a class="btn btn--gold" href="products.html">Explore Sarees</a></div>
+  <div id="done" hidden></div>
+  <div class="co" id="co">
+    <form id="coForm" novalidate>
+      <section class="panel" aria-labelledby="s1">
+        <h2 id="s1"><span class="step">1</span> Delivery details</h2>
+        <div class="fgrid">
+          <div class="field" data-f="name"><label for="fName">Full name <span class="req">*</span></label><input class="input" id="fName" name="name" autocomplete="name" required aria-describedby="eName"><div class="err" id="eName"></div></div>
+          <div class="field" data-f="phone"><label for="fPhone">Mobile number <span class="req">*</span></label><input class="input" id="fPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="16" placeholder="10-digit mobile" required aria-describedby="ePhone"><div class="err" id="ePhone"></div></div>
+          <div class="field full" data-f="address"><label for="fAddr">Full delivery address <span class="req">*</span></label><textarea class="input" id="fAddr" name="address" autocomplete="street-address" placeholder="House no, street, area, city, state" required aria-describedby="eAddr"></textarea><div class="err" id="eAddr"></div></div>
+          <div class="field" data-f="pincode"><label for="fPin">Pincode <span class="req">*</span></label><input class="input" id="fPin" name="pincode" inputmode="numeric" autocomplete="postal-code" maxlength="6" placeholder="6 digits" required aria-describedby="ePin"><div class="err" id="ePin"></div></div>
+          <div class="field" data-f="note"><label for="fNote">Note <span class="opt">Optional</span></label><input class="input" id="fNote" name="note" maxlength="140" placeholder="e.g. blouse stitching, delivery time"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="payPanel" hidden aria-labelledby="s2">
+        <h2 id="s2"><span class="step">2</span> Payment <span class="opt">Optional</span></h2>
+        <p style="color:var(--muted);font-size:.92rem">You can pay now by GPay / UPI, or simply confirm your order — we will contact you on WhatsApp with payment details.</p>
+        <div style="display:grid;gap:10px;margin-bottom:16px">
+          <label class="check"><input type="radio" name="paymode" value="later" checked> <span><b>Pay later</b> – confirm my order on WhatsApp first</span></label>
+          <label class="check"><input type="radio" name="paymode" value="now"> <span><b>I am paying now</b> via GPay / UPI</span></label>
+        </div>
+        <div id="paidBox" hidden>
+          <div class="pay">
+            <div class="pay__qr"><img id="qrImg" src="images/gpay-qr.webp" width="150" height="150" alt="GPay UPI QR code" loading="lazy">Scan with any UPI app</div>
+            <div>
+              <div style="font-size:.85rem;color:var(--muted)">Amount to pay</div>
+              <div class="pay__amt" data-amt>₹0</div>
+              <div class="kv"><div><span>GPay number:</span> <b id="gpayNo"></b></div><div><span>UPI ID:</span> <b id="upiId"></b><button class="copy" type="button" id="copyUpi">Copy</button></div><div><span>Note / Order ID:</span> <b id="oidPay"></b></div></div>
+              <a class="btn btn--gold btn--sm" id="upiBtn" href="#">Pay with GPay / UPI app</a>
+            </div>
+          </div>
+          <div class="fgrid" style="margin-top:18px">
+            <div class="field full" data-f="shot"><label for="shot">Payment screenshot <span class="req">*</span></label>
+              <div class="upload"><input id="shot" type="file" accept="image/*" aria-describedby="eShot hShot"><img id="shotPrev" hidden alt="Payment screenshot preview" width="72" height="96"></div>
+              <div class="hint" id="hShot">Image only, max 5 MB. It stays in your browser – it is only added to your PDF receipt.</div><div class="err" id="eShot"></div></div>
+            <div class="field" data-f="utr"><label for="fUtr">GPay Transaction ID / UTR <span class="opt">Optional</span></label><input class="input" id="fUtr" name="utr" inputmode="numeric" maxlength="12" placeholder="12 digits" aria-describedby="eUtr"><div class="err" id="eUtr"></div></div>
+            <div class="field full" data-f="paidOk"><label class="check"><input type="checkbox" name="paidOk"> <span>I have paid via GPay and will attach the screenshot in WhatsApp.</span></label><div class="err"></div></div>
+          </div>
+          <p class="note" style="margin-top:12px">After WhatsApp opens, please attach the same payment screenshot in the chat.</p>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="s3">
+        <h2 id="s3"><span class="step" id="stepConfirm">2</span> Confirm order</h2>
+        <p style="color:var(--muted);font-size:.92rem">We will download your <b>PDF order receipt</b> and open <b>WhatsApp</b> with your order details filled in. Just press send.</p>
+        <button class="btn btn--wa btn--block" id="confirmBtn" type="submit"><span data-icon="wa"></span> Confirm &amp; Proceed to WhatsApp</button>
+        <p style="font-size:.78rem;color:var(--muted);margin:10px 0 0">By ordering you agree to our <a href="terms.html">Terms</a> and <a href="policy.html">No refund / No return policy</a>.</p>
+      </section>
+    </form>
+    <aside class="co__aside"><div class="panel">
+      <h2>Order summary</h2>
+      <div class="mini" id="mini"></div>
+      <div class="sum" id="coSum"></div>
+      <button class="linkbtn" type="button" data-quote style="width:100%;margin-top:10px"><span data-icon="pdf"></span> Download Quotation (PDF)</button>
+      <p class="quote quote--sm" style="margin-top:14px">Every order is folded with care and sent with a smile.</p>
+    </div></aside>
+  </div>
+</div>
+</main>
+<div id="site-footer"></div>
+</body>
+</html>

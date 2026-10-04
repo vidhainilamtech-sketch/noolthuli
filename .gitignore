@@ -1,0 +1,15 @@
+# Marketing files live in C:\Marketing\noolthuli, never here
+social_media/
+*.mp4
+*.mov
+
+# Unused images (not referenced by any page)
+image/
+images/icon-192.png
+images/icon-512.png
+images/logo-mark.png
+
+# OS / editor
+Thumbs.db
+.DS_Store
+.vscode/
