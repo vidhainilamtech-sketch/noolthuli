@@ -132,6 +132,15 @@ main { display: block; min-height: 50vh; }
 .brand__txt { display: flex; flex-direction: column; line-height: 1; min-width: 0; }
 .brand__ta { height: 28px; width: auto; max-width: 120px; object-fit: contain; object-position: left; }
 .brand__en { font-family: var(--ff-head); font-size: .66rem; letter-spacing: .34em; color: var(--maroon); margin-top: 5px; font-weight: 700; }
+/* Small phones: keep logo, call, bag and menu on one line without overlap */
+@media (max-width: 400px) {
+  .hdr__in { gap: 8px; }
+  .hdr__in .icon-btn { width: 38px; height: 38px; }
+  .brand { gap: 6px; }
+  .brand__mark { width: 40px; height: 35px; }
+  .brand__ta { height: 23px; max-width: 98px; }
+  .brand__en { font-size: .56rem; letter-spacing: .26em; }
+}
 .nav { display: none; }
 .nav a {
   position: relative; text-decoration: none; color: var(--ink); font-weight: 500; font-size: .95rem; padding: 8px 2px;
@@ -170,8 +179,9 @@ main { display: block; min-height: 50vh; }
 }
 .mnav.open { transform: none; opacity: 1; visibility: visible; }
 .mnav a { display: block; padding: 14px 6px; font-family: var(--ff-head); font-size: 1.2rem; color: var(--maroon); text-decoration: none; border-bottom: 1px dashed var(--line); }
-.mnav .btn { margin-top: 18px; width: 100%; font-family: var(--ff-body); font-size: 1rem; color: #fff; border: 0; }
-.mnav .btn--wa { color: #fff; }
+.mnav a.btn { display: flex; align-items: center; justify-content: center; margin-top: 18px; width: 100%; min-height: 50px; padding: 12px 20px;
+  font-family: var(--ff-body); font-size: 1rem; line-height: 1.3; text-align: center; white-space: normal; color: #fff; border: 0; border-bottom: 0; }
+.mnav a.btn--wa { color: #fff; padding-left: 20px; }
 @media (min-width: 900px) {
   .nav { display: flex; gap: 30px; margin-right: 18px; }
   .burger, .mnav { display: none; }

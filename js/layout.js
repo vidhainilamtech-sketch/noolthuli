@@ -98,7 +98,7 @@
       '<button class="icon-btn burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span></button>' +
       '</div><div class="kasavu kasavu--thin"></div></header>' +
       '<nav class="mnav" id="mnav" aria-label="Mobile">' + navHtml +
-      '<a class="btn btn--wa" href="' + NT.wa("Hello " + S.name + ", I would like to know more about your cotton sarees.") + '" target="_blank" rel="noopener">' + ICON.wa + " Chat on WhatsApp</a></nav>";
+      '<a class="btn btn--wa" href="' + NT.wa("Hello " + S.name + ", I would like to know more about your cotton sarees.") + '" target="_blank" rel="noopener">Chat on WhatsApp</a></nav>';
   }
 
   /* ---------- Footer ---------- */
