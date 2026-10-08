@@ -13,3 +13,7 @@ images/logo-mark.png
 Thumbs.db
 .DS_Store
 .vscode/
+
+# Raw / source photos (edited, optimised copies live in images/sarees, images/custom, images/hero)
+images/products/
+*.jpeg

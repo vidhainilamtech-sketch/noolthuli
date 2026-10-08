@@ -42,15 +42,21 @@
 
   /* ---------- Helpers ---------- */
   var S = window.SITE || {};
+  var SM = /^images\/sarees\/.+\.webp$/;
+  var small = function (u) { return u.replace(/(-600)?\.webp$/, "-600.webp"); };
   var NT = window.NT = {
     ICON: ICON,
     $: function (s, r) { return (r || d).querySelector(s); },
     $$: function (s, r) { return Array.prototype.slice.call((r || d).querySelectorAll(s)); },
     esc: function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); },
     money: function (n) { return (S.currency || "₹") + Number(n || 0).toLocaleString("en-IN"); },
-    /* Resize Unsplash photos; local images are returned unchanged */
-    img: function (url, w) { return /images\.unsplash\.com/.test(url) ? url.replace(/([?&])w=\d+/, "$1w=" + w) : url; },
-    srcset: function (url) { return /images\.unsplash\.com/.test(url) ? [360, 540, 800, 1080].map(function (w) { return NT.img(url, w) + " " + w + "w"; }).join(", ") : ""; },
+    /* Product photos in images/sarees/ have a small "-600" copy for cards and thumbnails */
+    img: function (url, w) { return SM.test(url) && w <= 600 ? small(url) : url; },
+    srcset: function (url) { return SM.test(url) ? small(url) + " 600w, " + url + " 1200w" : ""; },
+    /* Each saree has its own crawlable page: sarees/<photo-name>.html (built by scripts/check.py) */
+    page: function (pr) { return "sarees/" + String(pr.image || pr.id).split("/").pop().replace(/\.\w+$/, "") + ".html"; },
+    /* Absolute URL (for Google / social previews) */
+    abs: function (url) { return /^https?:/.test(url) ? url : (S.siteUrl || "") + "/" + url; },
     wa: function (text) { return "https://wa.me/" + String(S.whatsapp || "").replace(/\D/g, "") + (text ? "?text=" + encodeURIComponent(text) : ""); },
     tel: function () { return "tel:+" + String(S.whatsapp || S.phone || "").replace(/\D/g, "").replace(/^(?!91)(\d{10})$/, "91$1"); },
     product: function (id) { return (window.PRODUCTS || []).filter(function (x) { return x.id === id; })[0]; },
@@ -64,7 +70,7 @@
     var list = window.PRODUCTS;
     if (!Array.isArray(list)) { console.warn("[Noolthuli] js/data.js is missing or has an error."); return; }
     var seen = {};
-    if (list.length > 20) console.warn("[Noolthuli] " + list.length + " products — 20 or fewer is recommended for speed.");
+    if (list.length > 30) console.warn("[Noolthuli] " + list.length + " products — 30 or fewer is recommended for speed.");
     list.forEach(function (x, i) {
       ["id", "name", "category", "image", "price"].forEach(function (k) {
         if (x[k] === undefined || x[k] === "") console.warn("[Noolthuli] Product #" + (i + 1) + " (" + (x.id || "no id") + ") is missing: " + k);
@@ -77,7 +83,7 @@
 
   /* ---------- Header ---------- */
   var page = d.body.getAttribute("data-page") || "";
-  var links = [["index.html", "Home", "home"], ["products.html", "Sarees", "products"], ["index.html#about", "Our Story", "about"], ["contact.html", "Contact", "contact"]];
+  var links = [["index.html", "Home", "home"], ["products.html", "Sarees", "products"], ["custom.html", "Customised", "custom"], ["index.html#about", "Our Story", "about"], ["contact.html", "Contact", "contact"]];
   var navHtml = links.map(function (l) { return '<a href="' + l[0] + '"' + (l[2] === page ? ' aria-current="page"' : "") + ">" + l[1] + "</a>"; }).join("");
   var hdr = d.getElementById("site-header");
   if (hdr) {
@@ -87,6 +93,7 @@
       '<img class="brand__mark" src="images/logo-mark.webp" width="58" height="50" alt="">' +
       '<span class="brand__txt"><img class="brand__ta" src="images/logo-tamil.webp" width="140" height="33" alt="' + NT.esc(S.nameTamil) + '"><span class="brand__en">' + NT.esc((S.name || "").toUpperCase()) + "</span></span></a>" +
       '<nav class="nav" aria-label="Main">' + navHtml + "</nav>" +
+      '<a class="icon-btn icon-btn--call" href="' + NT.tel() + '" aria-label="Call ' + NT.esc(S.name) + ' ' + NT.esc(S.phone) + '">' + ICON.phone + "</a>" +
       '<button class="icon-btn" type="button" data-cart-open aria-label="Open cart">' + ICON.bag + '<span class="cart-count" data-cart-count>0</span></button>' +
       '<button class="icon-btn burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span></button>' +
       '</div><div class="kasavu kasavu--thin"></div></header>' +
@@ -114,11 +121,12 @@
       (socHtml ? '<div class="social">' + socHtml + "</div>" : "") + "</div>" +
       '<div><h3>Shop</h3><ul><li><a href="products.html">All Sarees</a></li>' +
       (window.CATEGORIES || []).map(function (c) { return '<li><a href="products.html?cat=' + encodeURIComponent(c) + '">' + NT.esc(c) + "</a></li>"; }).join("") +
-      '<li><a href="checkout.html">Checkout</a></li></ul></div>' +
+      '<li><a href="custom.html">Customised Sarees</a></li><li><a href="custom.html#bulk">Bulk &amp; Shop Orders</a></li><li><a href="checkout.html">Checkout</a></li></ul></div>' +
       '<div><h3>Reach us</h3><ul>' + contact + "</ul></div>" +
       '</div><div class="ftr__bot"><span>© ' + new Date().getFullYear() + " " + NT.esc(S.name) + " (" + NT.esc(S.nameTamil) + ") · Owner: " + NT.esc(S.owner) + "</span>" +
       '<span><a href="terms.html">Terms</a> · <a href="policy.html">Shipping, Payment &amp; Privacy</a> · <a href="contact.html">Contact</a></span>' +
       '<a class="ftr__dev" href="https://vidhainilam.com" target="_blank" rel="noopener">Designed &amp; developed by <img src="images/vidhainilam.png" width="20" height="20" alt="" loading="lazy"><b>VidhaiNilam</b></a></div></div></footer>' +
+      '<a class="call-float" href="' + NT.tel() + '" aria-label="Call us now ' + NT.esc(S.phone) + '">' + ICON.phone + "</a>" +
       '<a class="wa-float" href="' + NT.wa("Hello " + S.name + ", I have a question about your sarees.") + '" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">' + ICON.wa + "</a>" +
       '<div class="toast" role="status" aria-live="polite" id="toast"></div>';
   }

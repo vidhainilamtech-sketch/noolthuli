@@ -11,11 +11,11 @@
 
   /* ---------- Product card ---------- */
   function card(p, i) {
-    var off = NT.off(p), out = p.inStock === false, url = "product.html?id=" + encodeURIComponent(p.id);
+    var off = NT.off(p), out = p.inStock === false, url = NT.page(p);
     return '<article class="card rv' + (i % 4 ? " d" + (i % 4) : "") + '">' +
       '<div class="card__media">' +
       (out ? '<span class="badge badge--out">Out of stock</span>' : off ? '<span class="badge">' + off + "% OFF</span>" : "") +
-      '<img src="' + NT.img(p.image, 540) + '" srcset="' + NT.srcset(p.image) + '" sizes="(min-width:1080px) 280px, (min-width:700px) 31vw, 48vw" width="540" height="720" loading="lazy" decoding="async" alt="' + esc(p.name) + " – " + esc(p.category) + '"></div>' +
+      '<img src="' + NT.img(p.image, 540) + '" srcset="' + NT.srcset(p.image) + '" sizes="(min-width:1080px) 280px, (min-width:700px) 31vw, 48vw" width="540" height="720" loading="lazy" decoding="async" alt="' + esc(p.alt || p.name + " – " + p.category) + '"></div>' +
       '<div class="card__body"><span class="card__cat">' + esc(p.category) + "</span>" +
       '<h3 class="card__name"><a href="' + url + '">' + esc(p.name) + "</a></h3>" +
       '<div class="price"><b>' + NT.money(p.price) + "</b>" + (p.oldPrice > p.price ? "<s>" + NT.money(p.oldPrice) + "</s>" : "") + "</div>" +
@@ -65,7 +65,7 @@
       var list = P.filter(function (p) { return p.category === c; });
       if (!list.length) return "";
       return '<a class="cat rv' + (i ? " d" + i : "") + '" href="products.html?cat=' + encodeURIComponent(c) + '">' +
-        '<img src="' + NT.img(list[0].image, 540) + '" srcset="' + NT.srcset(list[0].image) + '" sizes="(min-width:900px) 280px, 48vw" width="540" height="756" loading="lazy" alt="' + esc(c) + ' from Noolthuli">' +
+        '<img src="' + NT.img(list[0].image, 540) + '" srcset="' + NT.srcset(list[0].image) + '" sizes="(min-width:900px) 280px, 48vw" width="540" height="756" loading="lazy" alt="' + esc(c) + " – " + esc(list[0].alt || list[0].name) + '">' +
         '<span class="cat__lbl"><b>' + esc(c) + "</b><small>" + list.length + " designs</small></span></a>";
     }).join("");
     NT.reveal(cats);
@@ -138,7 +138,7 @@
   /* =================== PRODUCT DETAILS =================== */
   var pd = $("#pd");
   if (pd) {
-    var id = new URLSearchParams(location.search).get("id");
+    var id = pd.getAttribute("data-id") || new URLSearchParams(location.search).get("id");
     var p = NT.product(id) || (id ? null : P[0]);
     if (!p) {
       pd.innerHTML = '<div class="empty" style="grid-column:1/-1"><h1 style="font-size:1.8rem">Saree not found</h1><p>This design may have been sold out or removed.</p><a class="btn btn--gold" href="products.html">Browse all sarees</a></div>';
@@ -148,26 +148,30 @@
     var askMsg = "Hello " + S.name + ", I am interested in this saree:\n" + p.name + " (ID: " + p.id + ") – " + NT.money(p.price);
 
     /* SEO: title, description, canonical, JSON-LD */
-    d.title = p.name + " | " + S.name + " Cotton Sarees";
-    var md = $('meta[name="description"]'); if (md) md.setAttribute("content", p.shortDescription + " " + NT.money(p.price) + " · Free shipping · Order on WhatsApp.");
-    var cn = $('link[rel="canonical"]'); if (cn) cn.href = S.siteUrl + "/product.html?id=" + p.id;
+    d.title = p.name + " | " + S.name + " Salem";
+    var md = $('meta[name="description"]'); if (md) md.setAttribute("content", p.name + " – " + p.shortDescription + " Offer " + NT.money(p.price) + (p.oldPrice > p.price ? " (MRP " + NT.money(p.oldPrice) + ")" : "") + ". Free shipping from " + S.name + ", Salem. Order on WhatsApp.");
+    [["og:title", d.title], ["og:description", md ? md.getAttribute("content") : ""], ["og:image", NT.abs(p.image)], ["og:url", NT.abs(NT.page(p))]].forEach(function (m) {
+      var el = $('meta[property="' + m[0] + '"]'); if (el) el.setAttribute("content", m[1]);
+    });
+    var cn = $('link[rel="canonical"]'); if (cn) cn.href = NT.abs(NT.page(p));
     var ld = d.createElement("script"); ld.type = "application/ld+json";
     ld.textContent = JSON.stringify({
-      "@context": "https://schema.org", "@type": "Product", name: p.name, sku: p.id, image: imgs.map(function (u) { return NT.img(u, 900); }),
-      description: p.details, category: p.category, brand: { "@type": "Brand", name: S.name },
-      offers: { "@type": "Offer", url: S.siteUrl + "/product.html?id=" + p.id, priceCurrency: "INR", price: p.price,
+      "@context": "https://schema.org", "@type": "Product", name: p.name, sku: p.id, image: imgs.map(NT.abs),
+      description: p.details, category: p.category, brand: { "@type": "Brand", name: S.name }, material: "Cotton",
+      additionalProperty: (p.specs || []).map(function (r) { return { "@type": "PropertyValue", name: r[0], value: r[1] }; }),
+      offers: { "@type": "Offer", url: NT.abs(NT.page(p)), priceCurrency: "INR", price: p.price,
         availability: "https://schema.org/" + (out ? "OutOfStock" : "InStock"), shippingDetails: { "@type": "OfferShippingDetails", shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "INR" } } }
     });
-    d.head.appendChild(ld);
+    if (!d.querySelector('script[data-ld="product"]')) d.head.appendChild(ld); /* static saree pages already carry it */
 
     pd.innerHTML =
       '<div class="pd__gal"><div class="stage" id="stage">' +
-      '<img id="mainImg" src="' + NT.img(imgs[0], 900) + '" srcset="' + NT.srcset(imgs[0]).replace("800w", "800w, " + NT.img(imgs[0], 1100) + " 1100w") + '" sizes="(min-width:900px) 560px, 100vw" width="900" height="1125" alt="' + esc(p.name) + '" fetchpriority="high">' +
+      '<img id="mainImg" src="' + NT.img(imgs[0], 900) + '" srcset="' + NT.srcset(imgs[0]).replace("800w", "800w, " + NT.img(imgs[0], 1100) + " 1100w") + '" sizes="(min-width:900px) 560px, 100vw" width="900" height="1125" alt="' + esc(p.alt || p.name) + '" fetchpriority="high">' +
       '<span class="drape drape--l" aria-hidden="true"></span><span class="drape drape--r" aria-hidden="true"></span>' +
       '<span class="drape__seal" aria-hidden="true"><img src="images/logo-mark.webp" width="62" height="54" alt=""></span>' +
       (out ? '<span class="badge badge--out">Out of stock</span>' : off ? '<span class="badge">' + off + "% OFF</span>" : "") + "</div>" +
       (imgs.length > 1 ? '<div class="thumbs" role="group" aria-label="More photos">' + imgs.map(function (u, i) {
-        return '<button type="button" data-img="' + i + '" aria-current="' + !i + '" aria-label="Photo ' + (i + 1) + '"><img src="' + NT.img(u, 160) + '" width="70" height="88" alt="" loading="lazy"></button>';
+        return '<button type="button" data-img="' + i + '" aria-current="' + !i + '" aria-label="Photo ' + (i + 1) + " of " + esc(p.name) + '"><img src="' + NT.img(u, 160) + '" width="70" height="88" alt="" loading="lazy"></button>';
       }).join("") + "</div>" : "") + "</div>" +
       '<div class="pd__info"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a> / <a href="products.html?cat=' + encodeURIComponent(p.category) + '">' + esc(p.category) + "</a></nav>" +
       "<h1>" + esc(p.name) + "</h1>" +
@@ -177,12 +181,15 @@
       '<span class="stock' + (out ? " stock--out" : "") + '">' + (out ? "Currently out of stock" : p.madeToOrder ? "Made to order – " + esc(p.madeToOrder) : "In stock – ready to ship") + "</span>" +
       '<p class="pd__short" style="margin-top:14px">' + esc(p.shortDescription) + "</p>" +
       '<p class="pd__details">' + esc(p.details) + "</p>" +
+      (p.specs && p.specs.length ? '<table class="specs"><caption>Saree measurements</caption><tbody>' + p.specs.map(function (r) {
+        return '<tr><th scope="row">' + esc(r[0]) + "</th><td>" + esc(r[1]) + "</td></tr>";
+      }).join("") + "</tbody></table>" : "") +
       '<div class="pd__buy">' + (out ?
         '<a class="btn btn--wa btn--block" target="_blank" rel="noopener" href="' + NT.wa(askMsg + "\nPlease tell me when it is back in stock.") + '">' + NT.ICON.wa + " Notify me on WhatsApp</a>" :
         '<div class="pd__row"><span style="font-weight:500">Quantity</span><div class="qty"><button type="button" id="qm" aria-label="Decrease quantity">−</button><input id="qv" type="number" inputmode="numeric" min="1" max="' + window.Cart.MAX + '" value="1" aria-label="Quantity"><button type="button" id="qp" aria-label="Increase quantity">+</button></div></div>' +
         '<div class="btns"><button class="btn btn--gold" type="button" id="addBtn">' + NT.ICON.bag + ' Add to Bag</button><button class="btn" type="button" id="buyBtn">Buy Now</button></div>' +
         '<a class="btn btn--ghost btn--block" target="_blank" rel="noopener" href="' + NT.wa(askMsg) + '">' + NT.ICON.wa + " Ask about this saree</a>") + "</div>" +
-      '<ul class="perks"><li>' + NT.ICON.truck + "Free shipping on every order across India</li><li>" + NT.ICON.loom + "Directly from the manufacturer – no middlemen</li><li>" + NT.ICON.wa + "Order & support on WhatsApp " + esc(S.phone) + "</li><li>" + NT.ICON.shield + "<span>Please check our <a href=\"policy.html\">no return / no refund policy</a> before buying</span></li></ul>" +
+      '<ul class="perks"><li>' + NT.ICON.truck + "Free shipping on every order across India</li><li>" + NT.ICON.loom + "Directly from the manufacturer – no middlemen</li><li>" + NT.ICON.wa + "Order & support on WhatsApp " + esc(S.phone) + "</li><li>" + NT.ICON.gem + "<span>Want names or your own design on it? <a href=\"custom.html\">See customised sarees</a></span></li><li>" + NT.ICON.shield + "<span>Please check our <a href=\"policy.html\">no return / no refund policy</a> before buying</span></li></ul>" +
       '<p class="quote quote--sm" style="margin-top:14px">Made by hands that stand for hours, for the smile you wear for a lifetime.<small lang="ta">உங்கள் புன்னகையே எங்கள் உழைப்பின் பரிசு.</small></p></div>';
 
     /* --- Saree drape: covers the photo, then opens like a curtain --- */

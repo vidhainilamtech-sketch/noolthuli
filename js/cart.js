@@ -74,8 +74,8 @@
     }
     foot.hidden = false;
     body.innerHTML = items.map(function (l) {
-      return '<div class="line"><img src="' + NT.img(l.p.image, 200) + '" width="74" height="94" alt="' + NT.esc(l.p.name) + '" loading="lazy">' +
-        '<div><a class="line__name" href="product.html?id=' + l.id + '">' + NT.esc(l.p.name) + "</a>" +
+      return '<div class="line"><img src="' + NT.img(l.p.image, 200) + '" width="74" height="94" alt="' + NT.esc(l.p.alt || l.p.name) + '" loading="lazy">' +
+        '<div><a class="line__name" href="' + NT.page(l.p) + '">' + NT.esc(l.p.name) + "</a>" +
         '<div class="line__meta">ID: ' + l.id + " · " + NT.esc(l.p.shortDescription || "") + "</div>" +
         '<div class="line__meta">' + NT.money(l.p.price) + " each</div>" +
         '<div class="line__row">' + qtyHtml(l) + '<span class="line__total">' + NT.money(l.total) + "</span></div>" +

@@ -6,10 +6,8 @@
    website (header, footer, contact page, PDF receipt, etc.).
 
    ⏳ PENDING FROM CUSTOMER — fill these in when they arrive:
-      • email          (support mail id)
-      • address / landmark / city / mapsLink
-      • social links   (instagram, facebook, youtube, pinterest)
       • upiId / gpayNumber / qrImage   (optional — online payment)
+      • youtube / pinterest links      (optional)
       • siteUrl        (your real domain after hosting)
    ===================================================================== */
 
@@ -23,11 +21,11 @@ const SITE = {
   phone: "+91 63835 58387",              // shown on the site / tap-to-call
   whatsapp: "916383558387",              // country code + number, digits only
 
-  email: "",                             // ⏳ support mail id, e.g. "support@noolthuli.com"
-  address: "",                           // ⏳ full shop / factory address
-  landmark: "",                          // ⏳ e.g. "Near ... Temple"
-  city: "",                              // ⏳ e.g. "Coimbatore, Tamil Nadu"
-  mapsLink: "",                          // ⏳ Google Maps share link
+  email: "ramjaya068@gmail.com",         // support mail id
+  address: "Alagu Nagar, Allikuttai",    // shop / unit address
+  landmark: "",                          // e.g. "Near ... Temple" (optional)
+  city: "Salem, Tamil Nadu – 636014",
+  mapsLink: "https://www.google.com/maps/search/?api=1&query=Alagu+Nagar%2C+Allikuttai%2C+Salem+636014",
   hours: "Mon – Sat, 9:30 AM – 8:00 PM",
 
   /* ---- Online payment (OPTIONAL) ----------------------------------
@@ -41,10 +39,10 @@ const SITE = {
   shipping: "FREE",
   siteUrl: "https://noolthuli.com",     // live website address (no trailing /)
 
-  /* ---- Social media (⏳ pending) — empty = icon hidden ------------- */
+  /* ---- Social media — empty = icon hidden --------------------------- */
   social: {
-    instagram: "",                       // e.g. "https://instagram.com/noolthuli"
-    facebook: "",
+    instagram: "https://www.instagram.com/noolozhi_salem/",
+    facebook: "https://www.facebook.com/share/19RjcyZztS/",
     youtube: "",
     pinterest: ""
   }

@@ -2,172 +2,251 @@
    NOOLTHULI — PRODUCTS  (js/data.js)
    ---------------------------------------------------------------------
    ADD a saree    : copy one { ... } block, paste it, change the values.
-                    Give it a NEW unique id (NT021, NT022 ...).
+                    Give it a NEW unique id (NTB04, NTP07, NTE17 ...).
    REMOVE a saree : delete its { ... } block (and the comma after it).
    OUT OF STOCK   : set inStock: false
    SHOW ON HOME   : set featured: true
    MADE TO ORDER  : add madeToOrder: "ready in 7–12 days" (shown instead of "In stock")
 
-   Images: you can use
-     • your own photo  ->  image: "images/nt021.webp"   (put file in /images)
-     • an online photo ->  image: U("photo-id")           (Unsplash photo id)
-   Maximum 20 products is recommended for a fast website.
+   Images: real Noolthuli photos live in images/sarees/
+     • use an SEO file name:  images/sarees/<colour>-<design>-kerala-cotton-saree.webp
+     • also save a small copy with "-600" at the end of the name (for fast cards)
+     • alt: describe the photo in one sentence (colour, design, border) — helps Google & blind users
+   Prices: price = our offer price, oldPrice = MRP (shown struck through)
    ===================================================================== */
 
-/* Helper for live Unsplash photos — do not change */
-function U(id) { return "https://images.unsplash.com/photo-" + id + "?auto=format&fit=crop&q=72&w=900"; }
-
 /* Category names shown in filters (order matters) */
-const CATEGORIES = ["Printed Cotton", "Embroidered Cotton", "Kerala Cotton", "Custom Made"];
+const CATEGORIES = ["Base Sarees", "Printed Sarees", "Embroidery Sarees"];
 
-/* NOTE: all photos below are DUMMY stock photos (Unsplash) — replace them with
-   real Noolthuli product photos when available. Every saree is white Kerala cotton. */
+/* Prices: price = our offer price, oldPrice = MRP shown struck through */
+const PRICE = {
+  plain:   { price: 340,  oldPrice: 599 },
+  zebra:   { price: 490,  oldPrice: 849 },
+  checked: { price: 510,  oldPrice: 899 },
+  print:   { price: 1299, oldPrice: 1999 },
+  embroi:  { price: 750,  oldPrice: 1299 }
+};
+
+/* Saree measurements shown on every product page (same for the whole category) */
+const SPECS = {
+  base:   [["Width", "50 inch"], ["Border", "3 inch"]],
+  print:  [["Width", "50 inch"], ["Saree length", "6.50 metres"], ["Print length", "6.50 metres"], ["Border", "3 inch"]],
+  embroi: [["Width", "50 inch"], ["Saree length", "6.25 metres"], ["Border", "3 inch"]]
+};
+function I(slug) { return "images/sarees/" + slug + ".webp"; }
+
 const PRODUCTS = [
-  /* ---------- Printed Cotton ---------- */
+  /* ---------- Base Sarees (plain Kerala cotton, ready for custom print / embroidery) ---------- */
   {
-    id: "NT001", name: "White Kerala Cotton Saree – Leaf Print", category: "Printed Cotton",
-    image: U("1752468178780-2368233d691c"), gallery: [U("1752469113612-019661e82d20"), U("1752469113089-d1c68f5a6f85")],
-    shortDescription: "White Kerala cotton with colourful leaf prints.",
-    details: "Soft white Kerala cotton saree printed with scattered leaves in rose, mustard and green, finished with a gold border. Leaf colours can be customised to match your blouse. Length 5.5 m + 0.8 m blouse piece.",
-    price: 1599, oldPrice: 2199, inStock: true, featured: true
+    id: "NTB01", name: "Plain Kerala Cotton Saree – Broad Gold Zari Border", category: "Base Sarees",
+    image: I("plain-kerala-cotton-saree-broad-gold-zari-border"), gallery: [],
+    alt: "Folded plain off-white Kerala cotton saree with a broad gold zari border",
+    shortDescription: "Classic off-white Kerala cotton with a broad gold zari border.",
+    details: "Pure off-white Kerala cotton saree with a broad gold zari border and pallu. Wear it plain for Onam, Vishu and temple visits, or send us your design and we will add custom printing or embroidery on this base.",
+    specs: SPECS.base, price: PRICE.plain.price, oldPrice: PRICE.plain.oldPrice, inStock: true, featured: true
   },
   {
-    id: "NT002", name: "White Kerala Cotton Saree – Red Floral Print", category: "Printed Cotton",
-    image: U("1710967357078-ce58cf17500c"), gallery: [],
-    shortDescription: "White cotton with a soft red floral print.",
-    details: "White Kerala cotton saree with a delicate red floral print across the body and pallu. Light, breathable and perfect with a red blouse for festivals and functions.",
-    price: 1399, oldPrice: 1899, inStock: true, featured: true
+    id: "NTB02", name: "Kerala Cotton Zebra Saree – Gold Stripes & Zari Border", category: "Base Sarees",
+    image: I("kerala-cotton-saree-gold-stripes-zari-border"), gallery: [],
+    alt: "Off-white Kerala cotton zebra saree with thin gold stripes and a wide gold zari border",
+    shortDescription: "Off-white cotton with fine gold stripes and a wide zari border.",
+    details: "Off-white Kerala cotton saree woven with fine gold stripes across the body and a wide gold zari border. Elegant on its own and a lovely base for custom embroidery.",
+    specs: SPECS.base, price: PRICE.zebra.price, oldPrice: PRICE.zebra.oldPrice, inStock: true, featured: false
   },
   {
-    id: "NT003", name: "White Kerala Cotton Saree – Floral Border Print", category: "Printed Cotton",
-    image: U("1600066275318-f0006719f854"), gallery: [],
-    shortDescription: "White cotton with a bold black and red floral border.",
-    details: "Crisp white Kerala cotton saree with a wide printed floral border in black and red. A modern twist on the classic white saree — border colours can be customised.",
-    price: 1499, oldPrice: 1999, inStock: true, featured: true
-  },
-  {
-    id: "NT004", name: "White Kerala Cotton Saree – Pastel Leaf Print", category: "Printed Cotton",
-    image: U("1752469135696-f87983c56f2b"), gallery: [U("1752469113089-d1c68f5a6f85")],
-    shortDescription: "Cream-white cotton with pastel leaf prints.",
-    details: "Cream-white Kerala cotton saree with pastel leaf prints and a fine gold edge. Gentle, artistic and comfortable all day.",
-    price: 1549, oldPrice: 2099, inStock: true, featured: false
-  },
-  {
-    id: "NT005", name: "White Kerala Cotton Saree – Pink Stripe Print", category: "Printed Cotton",
-    image: U("1711688588602-dc9add74d1ff"), gallery: [U("1711688590034-0a3428dbd57b")],
-    shortDescription: "White cotton with a pink striped border.",
-    details: "White Kerala cotton saree with a soft textured body and printed pink stripe border and pallu. Fresh and graceful for day functions.",
-    price: 1299, oldPrice: 1799, inStock: true, featured: true
-  },
-  {
-    id: "NT006", name: "Ivory Kerala Cotton Saree – Block Print Butis", category: "Printed Cotton",
-    image: U("1769275060489-19d93bf1eeec"), gallery: [],
-    shortDescription: "Ivory cotton with small block-printed butis.",
-    details: "Ivory-white Kerala cotton saree with small block-printed butis all over and a printed border. Simple, elegant and easy to wear every day.",
-    price: 1249, oldPrice: 1699, inStock: true, featured: false
-  },
-  {
-    id: "NT007", name: "White Kerala Cotton Saree – Red Stripe Print", category: "Printed Cotton",
-    image: U("1711688590009-539d18c9d56f"), gallery: [],
-    shortDescription: "White cotton with fine red stripes on the pallu.",
-    details: "White Kerala cotton saree with fine red printed stripes on the border and pallu. Light and comfortable — a lovely everyday festive saree.",
-    price: 1199, oldPrice: 1649, inStock: true, featured: false
+    id: "NTB03", name: "Kerala Cotton Checked Saree – Gold Checks & Zari Border", category: "Base Sarees",
+    image: I("kerala-cotton-saree-gold-checks-zari-border"), gallery: [],
+    alt: "Off-white Kerala cotton saree with small gold checks and a broad gold zari border",
+    shortDescription: "Off-white cotton with small gold checks and a broad zari border.",
+    details: "Off-white Kerala cotton saree with small gold checks (kattam) all over and a broad gold zari border. A festive classic, also available with custom printing or embroidery.",
+    specs: SPECS.base, price: PRICE.checked.price, oldPrice: PRICE.checked.oldPrice, inStock: true, featured: false
   },
 
-  /* ---------- Embroidered Cotton ---------- */
+  /* ---------- Printed Sarees ---------- */
   {
-    id: "NT008", name: "White Kerala Cotton Saree – Sequin Embroidered Border", category: "Embroidered Cotton",
-    image: U("1704552973572-9deabbad9f82"), gallery: [U("1704552978534-390953932ea0")],
-    shortDescription: "Off-white cotton with sequin and thread embroidery.",
-    details: "Off-white Kerala cotton saree with sequin and thread embroidery along the gold border — sparkles beautifully under lights. Great for receptions and college fests.",
-    price: 1899, oldPrice: 2599, inStock: true, featured: true
+    id: "NTP01", name: "Kerala Cotton Saree – Green & Blue Floral Print", category: "Printed Sarees",
+    image: I("green-blue-floral-printed-kerala-cotton-saree"), gallery: [I("green-blue-floral-printed-kerala-cotton-saree-poster")],
+    alt: "Off-white Kerala cotton saree with green and blue floral prints and a gold zari border, draped on a mannequin",
+    shortDescription: "Green and blue floral prints with a gold zari border.",
+    details: "Off-white Kerala cotton saree printed with green and blue floral vines on the body, border and pallu, finished with a gold zari border. Soft, breathable and comfortable all day.",
+    specs: SPECS.print, price: PRICE.print.price, oldPrice: PRICE.print.oldPrice, inStock: true, featured: true
   },
   {
-    id: "NT009", name: "White Kerala Cotton Saree – Red Embroidered Border", category: "Embroidered Cotton",
-    image: U("1710967357894-7d93f1bffcb2"), gallery: [U("1710967357101-843e3a9ac9ee")],
-    shortDescription: "White cotton with a red thread-embroidered border.",
-    details: "White Kerala cotton saree with red thread embroidery along the border and pallu, paired with a red embroidered blouse piece. Thread colour can be customised.",
-    price: 1799, oldPrice: 2399, inStock: true, featured: true
+    id: "NTP02", name: "Kerala Cotton Saree – Maroon Stripe & Mustard Print", category: "Printed Sarees",
+    image: I("maroon-stripe-mustard-printed-kerala-cotton-saree"), gallery: [],
+    alt: "Off-white Kerala cotton saree with maroon stripes, mustard floral print and gold zari border, draped on a mannequin",
+    shortDescription: "Maroon stripes and mustard florals with a gold zari border.",
+    details: "Off-white Kerala cotton saree with a striped maroon pallu, mustard floral print and a black geometric border, finished with gold zari. A bold, festive printed saree.",
+    specs: SPECS.print, price: PRICE.print.price, oldPrice: PRICE.print.oldPrice, inStock: true, featured: true
   },
   {
-    id: "NT010", name: "White Kerala Cotton Saree – Pink Embroidered Border", category: "Embroidered Cotton",
-    image: U("1729101143891-a8fed18023f2"), gallery: [],
-    shortDescription: "White cotton with a pink embroidered border.",
-    details: "White Kerala cotton saree with a pink border finished in fine thread embroidery. Soft and pretty — perfect for haldi, birthdays and day events.",
-    price: 1699, oldPrice: 2299, inStock: true, featured: false
+    id: "NTP03", name: "Kerala Cotton Saree – Teal & Mustard Print", category: "Printed Sarees",
+    image: I("teal-mustard-printed-kerala-cotton-saree"), gallery: [],
+    alt: "Off-white Kerala cotton saree with teal and mustard yellow prints and a gold zari border, draped on a mannequin",
+    shortDescription: "Teal and mustard prints with a gold zari border.",
+    details: "Off-white Kerala cotton saree with teal motifs and mustard bands on the pallu and pleats, finished with a gold zari border. Bright and cheerful for functions and festivals.",
+    specs: SPECS.print, price: PRICE.print.price, oldPrice: PRICE.print.oldPrice, inStock: true, featured: true
   },
   {
-    id: "NT011", name: "White Kerala Cotton Saree – Gold Buti Embroidery", category: "Embroidered Cotton",
-    image: U("1710967356893-342efd3bd4f4"), gallery: [],
-    shortDescription: "White cotton with gold butis and a gold border.",
-    details: "Bright white Kerala cotton saree with embroidered gold butis across the body and a broad gold border. A festive classic for Onam, Vishu and weddings.",
-    price: 1899, oldPrice: 2499, inStock: true, featured: true
+    id: "NTP04", name: "Kerala Cotton Saree – Orange & Blue Print", category: "Printed Sarees",
+    image: I("orange-blue-printed-kerala-cotton-saree"), gallery: [],
+    alt: "Off-white Kerala cotton saree with orange zigzag and blue floral prints, draped on a mannequin",
+    shortDescription: "Orange zigzag and blue floral prints on white cotton.",
+    details: "Off-white Kerala cotton saree with a blue floral border and an orange zigzag pallu. Light, modern and easy to wear every day.",
+    specs: SPECS.print, price: PRICE.print.price, oldPrice: PRICE.print.oldPrice, inStock: true, featured: false
   },
   {
-    id: "NT012", name: "Off-White Kerala Cotton Saree – Thread Work Pallu", category: "Embroidered Cotton",
-    image: U("1710967355346-ae5ce0e35991"), gallery: [],
-    shortDescription: "Off-white cotton with thread work on the pallu.",
-    details: "Off-white Kerala cotton saree with delicate thread work on the pallu and a gold border. Pairs well with a gold or contrast blouse.",
-    price: 1649, oldPrice: 2199, inStock: true, featured: false
+    id: "NTP05", name: "Kerala Cotton Saree – Lavender & Green Print", category: "Printed Sarees",
+    image: I("lavender-green-printed-kerala-cotton-saree"), gallery: [],
+    alt: "Off-white Kerala cotton saree with lavender and green prints and a silver-white border, draped on a mannequin",
+    shortDescription: "Soft lavender and green prints on white cotton.",
+    details: "Off-white Kerala cotton saree with soft lavender and green printed bands on the border and pallu. Gentle pastel colours for day functions.",
+    specs: SPECS.print, price: PRICE.print.price, oldPrice: PRICE.print.oldPrice, inStock: true, featured: false
   },
   {
-    id: "NT013", name: "White Kerala Cotton Saree – Rani Pink Embroidered Pallu", category: "Embroidered Cotton",
-    image: U("1786300114351-c0c73bb6fe85"), gallery: [],
-    shortDescription: "White cotton with a rani-pink embroidered pallu.",
-    details: "White Kerala cotton saree with a striking rani-pink pallu and embroidered border. Comes with a matching blouse piece.",
-    price: 1749, oldPrice: 2349, inStock: true, featured: false
-  },
-
-  /* ---------- Kerala Cotton (classic white) ---------- */
-  {
-    id: "NT014", name: "Classic White Kerala Cotton Saree – Gold Border", category: "Kerala Cotton",
-    image: U("1679849922748-f59ba2e10c10"), gallery: [U("1778770217853-a907b882b0c9")],
-    shortDescription: "Off-white pure cotton with a gold border.",
-    details: "Pure cotton Kerala saree in natural off-white with a gold border and matching pallu. Soft, breathable and perfect for Onam, Vishu and temple visits. Add custom printing or embroidery on request.",
-    price: 1199, oldPrice: 1699, inStock: true, featured: true
-  },
-  {
-    id: "NT015", name: "Onam Set White Kerala Cotton Saree", category: "Kerala Cotton",
-    image: U("1787295779699-e2c006307746"), gallery: [U("1787295779668-6ad1171580ff"), U("1787295779612-b3182bea0a81")],
-    shortDescription: "White cotton set saree with green blouse piece.",
-    details: "Traditional Kerala set saree in crisp white cotton with a gold border and contrast bottle-green blouse piece. Ideal for family and group Onam celebrations — bulk orders welcome.",
-    price: 1099, oldPrice: 1599, inStock: true, featured: false
-  },
-  {
-    id: "NT016", name: "Temple Visit Plain White Kerala Cotton Saree", category: "Kerala Cotton",
-    image: U("1742677052550-33422264e846"), gallery: [],
-    shortDescription: "Simple white cotton for daily and temple wear.",
-    details: "Pure white Kerala cotton saree with a neat gold border — simple, sacred and comfortable. A must-have in every wardrobe.",
-    price: 999, oldPrice: 1399, inStock: true, featured: false
-  },
-  {
-    id: "NT017", name: "White Kerala Cotton Saree – Broad Gold Border", category: "Kerala Cotton",
-    image: U("1742677052542-580678a8d585"), gallery: [U("1742677052539-c914ba59c497")],
-    shortDescription: "White cotton with a broad gold border.",
-    details: "White Kerala cotton saree with a broad gold border and pallu. Classic, elegant and easy to drape for functions and festivals.",
-    price: 1149, oldPrice: 1599, inStock: true, featured: false
-  },
-  {
-    id: "NT018", name: "White Kerala Cotton Saree – Fine Gold Line", category: "Kerala Cotton",
-    image: U("1659293554631-d7a38642c5e3"), gallery: [U("1774814327264-45f6a47e4d36")],
-    shortDescription: "White cotton with a slim gold line border.",
-    details: "Graceful white Kerala cotton saree with a slim gold line border and plain pallu. Minimal and timeless — a perfect base for custom embroidery.",
-    price: 1049, oldPrice: 1499, inStock: true, featured: false
+    id: "NTP06", name: "Kerala Cotton Saree – Black & Grey Block Print", category: "Printed Sarees",
+    image: I("black-grey-block-printed-kerala-cotton-saree"), gallery: [],
+    alt: "Off-white Kerala cotton saree with black and grey block prints and a silver border, draped on a mannequin",
+    shortDescription: "Monochrome black and grey block prints.",
+    details: "Off-white Kerala cotton saree with black and grey block prints on the border and pallu. Simple, graceful and great for office and everyday wear.",
+    specs: SPECS.print, price: PRICE.print.price, oldPrice: PRICE.print.oldPrice, inStock: true, featured: false
   },
 
-  /* ---------- Custom Made (price shown is the starting price) ---------- */
+  /* ---------- Embroidery Sarees ---------- */
   {
-    id: "NT019", name: "Custom Print White Kerala Cotton Saree – Your Design", category: "Custom Made",
-    image: U("1787295779641-28182ac10feb"), gallery: [U("1787295779632-0d3689d03b0a")],
-    shortDescription: "Your print on white Kerala cotton — made to order.",
-    details: "Tell us your print style (floral, leaf, paisley, block, logo or name) and colours — we print it on white Kerala cotton for you. Starting price shown; final price depends on design and quantity. Bulk orders for families, functions and teams welcome. Making time 7–12 days.",
-    price: 1499, oldPrice: 1999, inStock: true, featured: true, madeToOrder: "ready in 7–12 days"
+    id: "NTE01", name: "Peacock Embroidered Kerala Cotton Saree with Tassels", category: "Embroidery Sarees",
+    image: I("peacock-embroidered-kerala-cotton-saree-tassels"), gallery: [],
+    alt: "White Kerala cotton sarees with gold peacock embroidery, flower vine zari border and coloured tassels",
+    shortDescription: "Gold peacock embroidery, flower vine border and tassels.",
+    details: "White Kerala cotton saree with large gold-thread peacock embroidery, a gold zari border embroidered with a flower vine, and tassels on the pallu. Available with green, multicolour, purple or maroon tassels.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: true
   },
   {
-    id: "NT020", name: "Custom Embroidery White Kerala Cotton Saree – Name / Motif", category: "Custom Made",
-    image: U("1774814325557-5d2f88744906"), gallery: [U("1774814327264-45f6a47e4d36")],
-    shortDescription: "Your motif or name embroidered on white cotton.",
-    details: "Get your own motif, name, logo or design embroidered on a white Kerala cotton saree, in the thread colours you choose. Starting price shown; final price depends on embroidery size and quantity. Share your design on WhatsApp. Making time 10–15 days.",
-    price: 1999, oldPrice: 2599, inStock: true, featured: true, madeToOrder: "ready in 10–15 days"
+    id: "NTE02", name: "Kerala Cotton Saree – Baby Krishna Embroidery (Blue)", category: "Embroidery Sarees",
+    image: I("baby-krishna-embroidered-kerala-cotton-saree-blue"), gallery: [],
+    alt: "White Kerala cotton saree with blue baby Krishna embroidery and a gold zari border",
+    shortDescription: "Baby Krishna embroidery in blue with a gold zari border.",
+    details: "White Kerala cotton saree embroidered with baby Krishna (Kannan) motifs in blue and gold along the pallu, with small butis and a gold zari border. Perfect for Janmashtami, Guruvayur visits and festivals.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: true
+  },
+  {
+    id: "NTE03", name: "Kerala Cotton Saree – Dancing Peacock Embroidery", category: "Embroidery Sarees",
+    image: I("dancing-peacock-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton sarees with colourful dancing peacock embroidery, gold zari border and tassels",
+    shortDescription: "Colourful dancing peacocks with a gold zari border.",
+    details: "White Kerala cotton saree with colourful dancing peacock embroidery, a gold zari border with bird motifs and tasselled pallu. A cheerful festive saree.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: true
+  },
+  {
+    id: "NTE04", name: "Kerala Cotton Saree – Gold Peacock Vine Embroidery", category: "Embroidery Sarees",
+    image: I("gold-peacock-vine-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with gold leaf vines and green peacock embroidery and a bright gold zari border",
+    shortDescription: "Gold leaf vines and peacocks all over the pallu.",
+    details: "White Kerala cotton saree with rich gold-thread leaf vines and green and maroon peacocks across the pallu, small butis on the body and a bright gold zari border. A grand choice for weddings and Onam.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: true
+  },
+  {
+    id: "NTE17", name: "Kerala Cotton Saree – Magenta & Gold Diamond Embroidery", category: "Embroidery Sarees",
+    image: I("magenta-gold-diamond-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with magenta and gold diamond flower embroidery and an embroidered gold zari border",
+    shortDescription: "Magenta and gold diamond motifs with an embroidered zari border.",
+    details: "White Kerala cotton saree with large diamond motifs of tiny flowers embroidered half in magenta and half in gold, and a broad gold zari border embroidered with magenta diamonds and gold flowers. Rich and festive, perfect for Onam and weddings.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: true
+  },
+  {
+    id: "NTE05", name: "Kerala Cotton Saree – Multicolour Peacock Embroidery", category: "Embroidery Sarees",
+    image: I("multicolour-peacock-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with multicolour peacock embroidery on the pallu and a gold zari border",
+    shortDescription: "Multicolour peacocks on the pallu with a gold border.",
+    details: "White Kerala cotton saree with a row of multicolour peacock embroidery on the pallu, small butis on the body and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE06", name: "Kerala Cotton Saree – Green Peacock Embroidery with Tassels", category: "Embroidery Sarees",
+    image: I("green-peacock-embroidered-kerala-cotton-saree-tassels"), gallery: [],
+    alt: "White Kerala cotton saree with green and gold peacock embroidery, floral zari border and maroon tassels",
+    shortDescription: "Green and gold peacocks, floral border and tassels.",
+    details: "White Kerala cotton saree with green and gold peacock embroidery on the pallu, leaf butis on the body, an embroidered floral zari border and maroon tassels.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE07", name: "Kerala Cotton Saree – Orange Peacock Border Embroidery", category: "Embroidery Sarees",
+    image: I("orange-peacock-border-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with orange and green peacock embroidery along the border and a gold zari border",
+    shortDescription: "Orange peacocks along the border with flower butis.",
+    details: "White Kerala cotton saree with orange and green peacock embroidery running along the border, small flower butis and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE08", name: "Kerala Cotton Saree – Peacock & Blue Vine Embroidery", category: "Embroidery Sarees",
+    image: I("peacock-blue-vine-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with pink and blue peacock embroidery, a blue vine border and gold zari border",
+    shortDescription: "Pink and blue peacocks with a blue vine border.",
+    details: "White Kerala cotton saree embroidered with pink and blue peacocks on the pallu, a blue flower-vine border and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE09", name: "Kerala Cotton Saree – Krishna Embroidery (Red)", category: "Embroidery Sarees",
+    image: I("krishna-embroidered-kerala-cotton-saree-red"), gallery: [],
+    alt: "White Kerala cotton saree with red and gold Krishna embroidery on the pallu and a gold zari border",
+    shortDescription: "Krishna embroidery in red and gold.",
+    details: "White Kerala cotton saree embroidered with Krishna motifs in red, peach and gold along the pallu, with small butis and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE10", name: "Kerala Cotton Saree – Pink Lotus Mandala Embroidery", category: "Embroidery Sarees",
+    image: I("pink-lotus-mandala-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with pink lotus mandala embroidery, zigzag border and gold zari border",
+    shortDescription: "Pink lotus mandalas with a zigzag border.",
+    details: "White Kerala cotton saree with pink and red lotus mandala embroidery on the pallu, a zigzag embroidered border, small butis and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE11", name: "Kerala Cotton Saree – Purple Lotus Mandala Embroidery", category: "Embroidery Sarees",
+    image: I("purple-lotus-mandala-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with purple and gold lotus mandala embroidery, zigzag border and gold zari border",
+    shortDescription: "Purple and gold lotus mandalas with a zigzag border.",
+    details: "White Kerala cotton saree with purple and gold lotus mandala embroidery on the pallu, a zigzag embroidered border and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE12", name: "Kerala Cotton Saree – Green & Gold Lotus Embroidery", category: "Embroidery Sarees",
+    image: I("green-gold-lotus-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with green and gold lotus embroidery, zigzag border and gold zari border",
+    shortDescription: "Green and gold lotus motifs with a zigzag border.",
+    details: "White Kerala cotton saree with green and gold lotus embroidery on the pallu, a zigzag embroidered border, leaf butis and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE13", name: "Kerala Cotton Saree – Red & Blue Flower Embroidery", category: "Embroidery Sarees",
+    image: I("red-blue-flower-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with large red and blue flower embroidery in gold and an embroidered gold zari border",
+    shortDescription: "Large red and blue flowers with a rich embroidered border.",
+    details: "White Kerala cotton saree with large red and blue flower medallions outlined in gold thread, and a broad gold zari border fully embroidered with red and blue flowers.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE14", name: "Kerala Cotton Saree – Pink & Blue Paisley Embroidery", category: "Embroidery Sarees",
+    image: I("pink-paisley-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "Kerala cotton saree with large pink, blue and gold paisley embroidery and a gold zari border",
+    shortDescription: "Large pink, blue and gold paisleys (manga design).",
+    details: "Kerala cotton saree with large pink, blue and gold paisley (manga) embroidery on the pallu, small paisley butis and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE15", name: "Kerala Cotton Saree – Black Bird Embroidery", category: "Embroidery Sarees",
+    image: I("black-bird-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with black and grey bird embroidery, swirl border and gold zari border",
+    shortDescription: "Black and grey birds with a swirl border.",
+    details: "White Kerala cotton saree with black and grey bird embroidery on the pallu, a swirl embroidered border, black butis and a gold zari border. A striking monochrome look.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
+  },
+  {
+    id: "NTE16", name: "Kerala Cotton Saree – Black Floral Embroidery", category: "Embroidery Sarees",
+    image: I("black-floral-embroidered-kerala-cotton-saree"), gallery: [],
+    alt: "White Kerala cotton saree with black and grey floral embroidery on the pallu and a gold zari border",
+    shortDescription: "Black and grey flowers all over the pallu.",
+    details: "White Kerala cotton saree with black and grey flower embroidery across the pallu, small black butis on the body and a gold zari border.",
+    specs: SPECS.embroi, price: PRICE.embroi.price, oldPrice: PRICE.embroi.oldPrice, inStock: true, featured: false
   }
 ];

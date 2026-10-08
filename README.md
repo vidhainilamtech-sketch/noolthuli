@@ -8,8 +8,8 @@ You can open `index.html` with a double-click, or host it free on Netlify, Cloud
 | File | What it holds |
 |---|---|
 | `js/config.js` | **Business details**: name, phone, WhatsApp, email, address, social links, UPI. Values still pending from the customer are marked ⏳. |
-| `js/data.js` | **Products**: 20 sarees, categories and prices |
-| `images/` | Logo, icons, QR code and any product photos of your own |
+| `js/data.js` | **Products**: 26 real sarees (Plain ₹340, Zebra ₹490, Checked ₹510, Embroidery ₹750, Printed ₹1299) with measurements, categories, prices and alt text |
+| `images/` | Logo, icons, QR code. Product photos are in `images/sarees/` (SEO file names, plus a `-600` small copy) |
 
 All other files run on their own and need no changes.
 
@@ -70,7 +70,7 @@ Open `js/data.js`. Each saree is one block:
 - **Photos:** put your photo in `/images` (WebP or JPG, portrait 3:4, about 900 px wide). Or use `U("unsplash-photo-id")` for an online photo.
 - **Category:** use one of the names in `CATEGORIES` at the top of the file. You can also add a new name there.
 - Keep it to **20 products or fewer** so the site stays fast.
-- Afterwards, run `python scripts/check.py`. It updates the sitemap and warns about missing images or repeated ids.
+- Afterwards, run `python scripts/check.py` (needs Python + Node.js). It rebuilds one SEO page per saree in `sarees/`, pre-renders the saree grid in `products.html`, updates `sitemap.xml` (with product photos) and warns about missing images, alt text or repeated ids. **Never edit files in `sarees/` by hand** — they are regenerated.
 
 ## c) Change the company name, phone number, email or UPI ID
 
@@ -89,7 +89,9 @@ Everything is in **`js/config.js`**. The header, footer, contact page, WhatsApp 
 - [ ] (Optional) Set `upiId` and `gpayNumber`, and replace `images/gpay-qr.webp` with the real QR code
 - [ ] Replace the sample Unsplash photos with **real photos of your sarees**, and check the names, prices and descriptions
 - [ ] Set `siteUrl` and replace `https://noolthuli.com` in all `.html` files
-- [ ] Run `python scripts/check.py` (regenerates `sitemap.xml` and `robots.txt`)
+- [ ] Run `python scripts/check.py` (regenerates `sarees/*.html`, `sitemap.xml` and `robots.txt`)
+- [ ] Google Tag Manager `GTM-PPXWFGCL` is on every page — set up GA4 / Meta Pixel tags inside GTM
+- [ ] Submit `sitemap.xml` in Google Search Console and create a Google Business Profile (Salem address)
 - [ ] On a **real phone**, place a test order: add 3 sarees, check out, confirm that the PDF downloads and WhatsApp opens with the order
 - [ ] Test the contact form and the WhatsApp buttons
 - [ ] Share the link on WhatsApp and check that the preview shows the logo
