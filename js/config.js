@@ -21,7 +21,7 @@ const SITE = {
   phone: "+91 63835 58387",              // shown on the site / tap-to-call
   whatsapp: "916383558387",              // country code + number, digits only
 
-  email: "ramjaya068@gmail.com",         // support mail id
+  email: "noolthuli@gmail.com",         // support mail id
   address: "Alagu Nagar, Allikuttai",    // shop / unit address
   landmark: "",                          // e.g. "Near ... Temple" (optional)
   city: "Salem, Tamil Nadu – 636014",
@@ -41,7 +41,7 @@ const SITE = {
 
   /* ---- Social media — empty = icon hidden --------------------------- */
   social: {
-    instagram: "https://www.instagram.com/noolozhi_salem/",
+    instagram: "https://www.instagram.com/noolizhai_salem/",
     facebook: "https://www.facebook.com/share/19RjcyZztS/",
     youtube: "",
     pinterest: ""

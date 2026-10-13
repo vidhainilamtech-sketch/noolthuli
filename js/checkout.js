@@ -159,7 +159,9 @@
   function waMessage(o, short) {
     var line = function (l, i) {
       var nm = short === 2 ? "" : short ? l.name.slice(0, 26) + (l.name.length > 26 ? "…" : "") + " | " : l.name + " | ";
-      return (i + 1) + ") ID: " + l.id + " | " + nm + "Qty: " + l.qty + " x ₹" + l.price.toLocaleString("en-IN") + " = ₹" + (l.qty * l.price).toLocaleString("en-IN");
+      var pr = short !== 2 && NT.product(l.id);
+      return (i + 1) + ") ID: " + l.id + " | " + nm + "Qty: " + l.qty + " x ₹" + l.price.toLocaleString("en-IN") + " = ₹" + (l.qty * l.price).toLocaleString("en-IN") +
+        (pr ? "\n🔗 " + NT.abs(NT.page(pr)) : "");
     };
     var c = o.customer, pay = o.payment;
     return ["🛍️ *New Order – " + S.name + "*", "Order ID: " + o.id, "Customer: " + c.name + " | Mobile: " + c.phone,

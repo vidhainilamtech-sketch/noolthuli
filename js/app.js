@@ -145,7 +145,7 @@
       return;
     }
     var imgs = [p.image].concat(p.gallery || []), out = p.inStock === false, off = NT.off(p);
-    var askMsg = "Hello " + S.name + ", I am interested in this saree:\n" + p.name + " (ID: " + p.id + ") – " + NT.money(p.price);
+    var askMsg = "Hello " + S.name + ", I am interested in this saree:\n" + p.name + " (ID: " + p.id + ") – " + NT.money(p.price) + "\n" + NT.abs(NT.page(p));
 
     /* SEO: title, description, canonical, JSON-LD */
     d.title = p.name + " | " + S.name + " Salem";
